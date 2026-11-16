@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        /* Header */
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo i {
+            font-size: 25px;
+            color: #60a5fa;
+        }
+
+        .logo h1 {
+            font-size: 23px;
+            font-weight: 600;
+        }
+
+        .add-btn {
+            text-decoration: none;
+            background: #3b82f6;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* Main Section */
+
+        .main {
+            width: 85%;
+            margin: 40px auto;
+        }
+
+        .heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .heading h2 {
+            font-size: 24px;
+            color: #172554;
+        }
+
+        .heading p {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Student Cards Container */
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        /* Student Card */
+
+        .card {
+            width: 100%;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.09);
+        }
+
+        .card img {
+            width: 105px;
+            height: 105px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #dbeafe;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .student-name {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        /* Student Details */
+
+        .details {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+        }
+
+        .details p {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 13px;
+            line-height: 1.4;
+        }
+
+        .details span {
+            color: #334155;
+            font-weight: 600;
+        }
+
+        /* Action Buttons */
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .actions a,
+        .actions button {
+            text-decoration: none;
+            border: none;
+            padding: 9px 10px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: 0.3s;
+        }
+
+        .view-btn {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .view-btn:hover {
+            background: #dbeafe;
+        }
+
+        .update-btn {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .update-btn:hover {
+            background: #d1fae5;
+        }
+
+        .delete-btn {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .delete-btn:hover {
+            background: #fee2e2;
+        }
+
+        /* Responsive Design */
+
+        @media(max-width: 700px) {
+
+            .header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 18px;
+                align-items: flex-start;
+            }
+
+            .logo h1 {
+                font-size: 19px;
+            }
+
+            .main {
+                width: 92%;
+                margin: 30px auto;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .heading h2 {
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <div class="logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h1>Student Management System</h1>
+        </div>
+
+        <a href="/add-student" class="add-btn">
+            <i class="fa-solid fa-plus"></i> Add Student
+        </a>
+
+    </div>
+
+    <!-- Main Section -->
+
+    <div class="main">
+
+        <div class="heading">
+            <div>
+                <h2>Student Details</h2>
+                <p>Manage and view all registered students</p>
+            </div>
+        </div>
+
+        <!-- Student Cards -->
+
+        <div class="container">
+
+            {% for std in stds %}
+
+            <div class="card">
+
+                <img src="{{std[6]}}" alt="Student Image">
+
+                <h3 class="student-name">{{std[1]}}</h3>
+
+                <div class="details">
+
+                    <p>Age : <span>{{std[2]}}</span></p>
+
+                    <p>Gender : <span>{{std[3]}}</span></p>
+
+                    <p>Course : <span>{{std[5]}}</span></p>
+
+                </div>
+
+                <!-- Card Actions -->
+
+                <div class="actions">
+
+                    <a href="/students/{{std[0]}}" class="view-btn">
+                        <i class="fa-solid fa-eye"></i> View
+                    </a>
+
+                    <a href="/student/edit/{{std[0]}}" class="update-btn">
+                        <i class="fa-solid fa-pen-to-square"></i> Update
+                    </a>
+
+                    <form action="/student/delete/{{std[0]}}" method="post">
+
+                        <button type="submit" class="delete-btn">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</body>
+</html>
